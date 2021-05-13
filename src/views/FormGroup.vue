@@ -2,7 +2,7 @@
   <div>
     <b-container>
       <ValidationObserver v-slot="{ handleSubmit }">
-        <b-form @submit.prevent="handleSubmit(submitDesign1($event))">
+        <b-form @submit.prevent="handleSubmit(submit($event))">
           <h5>Form design 1</h5>
 
           <NxBFormGroup
@@ -66,6 +66,16 @@ export default {
     return {
       form: {},
     };
+  },
+  methods: {
+    submit(evt) {
+      return () => {
+        const form = new FormData(evt.target);
+        const jsonForm = Object.fromEntries(form);
+
+        console.log(jsonForm);
+      };
+    },
   },
 };
 </script>

@@ -24,6 +24,11 @@ const routes = [
     name: "FormGroup",
     component: () => import("../views/FormGroup.vue"),
   },
+  {
+    path: "/form-schema",
+    name: "FormSchema",
+    component: () => import("../views/FormSchema.vue"),
+  },
 ];
 
 const router = new VueRouter({
