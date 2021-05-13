@@ -2,10 +2,10 @@ import { curry } from "lodash/fp";
 
 /**
  * Wrap a form input element to schema field
- * 
+ *
  * FormGroup
  * - normally refer to NxBFormGroup, a bform group with validation
- * 
+ *
  * FormInput
  * - in addtional to any bootstrap vue form element
  * - please create a new schema component that map the schema object to the bootstrap vue component
