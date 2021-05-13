@@ -1,50 +1,35 @@
 import { curry } from "lodash/fp";
 
-export const createSchemaField = curry((FormGroup, FormInput) => ({
-  render() {
-    return (
-      <FormGroup attrs={this.groupAttrs}>
-        <FormInput
-          attrs={this.inputAttrs}
-          on={this.$listeners}
-          scopedSlots={this.$scopedSlots}
-        />
-      </FormGroup>
-    );
-  },
-  props: {
-    schema: {
-      type: Object,
-      default: () => ({
-        label: "Form title",
-      }),
+export const createSchemaField = curry(function (FormGroup, FormInput) {
+  return {
+    render() {
+      return (
+        <FormGroup
+          name={this.name}
+          label={this.schema.label}
+          rules={[]}
+          required={this.schema.required}
+          attrs={this.groupAttrs}
+        >
+          <FormInput
+            name={this.name}
+            schema={this.schema}
+            value={this.value}
+            attrs={this.inputAttrs}
+            on={this.$listeners}
+          />
+        </FormGroup>
+      );
     },
-    name: {
-      type: String,
-      default: "",
+    props: {
+      schema: {
+        type: Object,
+      },
+      name: {
+        type: String,
+        default: "",
+      },
+      value: {},
     },
-    value: {},
-  },
-  computed: {
-    groupAttrs() {
-      const attrs = {
-        // validation-group props
-        name: this.$attrs.name,
-        label: this.schema.label,
-        rules: [],
-        required: this.schema.required,
-      };
-
-      return attrs;
-    },
-    inputAttrs() {
-      const attrs = {
-        name: this.$attrs.name,
-        schema: this.schema,
-        value: this.value,
-      };
-
-      return attrs;
-    },
-  },
-}));
+  };
+});
