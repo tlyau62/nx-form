@@ -7,6 +7,7 @@
 
           <NxBFormGroup
             name="email"
+            label="Email"
             required
             :rules="{ email: true }"
             v-slot="{ state }"
@@ -14,7 +15,12 @@
             <b-form-input v-model="form.email" :state="state" name="email" />
           </NxBFormGroup>
 
-          <NxBFormGroup name="username" required v-slot="{ state }">
+          <NxBFormGroup
+            name="username"
+            label="Username"
+            required
+            v-slot="{ state }"
+          >
             <b-form-input
               v-model="form.username"
               :state="state"
@@ -22,7 +28,12 @@
             />
           </NxBFormGroup>
 
-          <NxBFormGroup name="password" required v-slot="{ state }">
+          <NxBFormGroup
+            name="password"
+            label="Password"
+            required
+            v-slot="{ state }"
+          >
             <b-form-input
               v-model="form.password"
               :state="state"
