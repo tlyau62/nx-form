@@ -5,12 +5,20 @@
         <b-form @submit.prevent="handleSubmit(submit($event))">
           <h5>Form design 2</h5>
 
-          {{ address }}
+          <p>{{ address }}</p>
+
+          <p>{{ dob }}</p>
 
           <NxBFormSchemaTextField
             name="address"
             :schema="textSchema"
             v-model="address"
+          />
+
+          <NxBFormSchemaObjectField
+            name="dob"
+            :schema="objectSchema"
+            v-model="dob"
           />
 
           <b-button type="submit">Submit</b-button>
@@ -22,7 +30,10 @@
 
 <script>
 import { ValidationObserver } from "vee-validate";
-import { NxBFormSchemaTextField } from "../components/nx-b-form-schema-fields";
+import {
+  NxBFormSchemaTextField,
+  NxBFormSchemaObjectField,
+} from "../components/nx-b-form-schema-fields";
 
 const textSchema = {
   type: "string",
@@ -31,15 +42,36 @@ const textSchema = {
   placeholder: "Please input some text...",
 };
 
+const objectSchema = {
+  type: "object",
+  label: "DOB",
+  fields: {
+    day: {
+      type: "string",
+      label: "Day",
+    },
+    month: {
+      type: "string",
+      label: "Month",
+    },
+  },
+};
+
 export default {
   components: {
     ValidationObserver,
     NxBFormSchemaTextField,
+    NxBFormSchemaObjectField,
   },
   data() {
     return {
       address: "asdf",
+      dob: {
+        day: "",
+        month: "",
+      },
       textSchema,
+      objectSchema,
     };
   },
   methods: {
