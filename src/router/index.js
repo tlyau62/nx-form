@@ -19,6 +19,11 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/About.vue"),
   },
+  {
+    path: "/form-group",
+    name: "FormGroup",
+    component: () => import("../views/FormGroup.vue"),
+  },
 ];
 
 const router = new VueRouter({
