@@ -2,7 +2,8 @@
   <BFormInput
     :name="name"
     :placeholder="schema.placeholder"
-    v-model="localValue"
+    :value="value"
+    @input="$listeners.input"
   />
 </template>
 
@@ -17,22 +18,6 @@ export default {
     name: {},
     schema: {},
     value: {},
-  },
-  data() {
-    return {
-      localValue: null,
-    };
-  },
-  watch: {
-    value: {
-      handler(value) {
-        this.localValue = value;
-      },
-      immediate: true,
-    },
-    localValue(localValue) {
-      this.$emit("input", localValue);
-    },
   },
 };
 </script>
