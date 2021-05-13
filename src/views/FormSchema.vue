@@ -9,6 +9,8 @@
 
           <p>{{ dob }}</p>
 
+          <p>{{ nestedObject }}</p>
+
           <NxBFormSchemaTextField
             name="address"
             :schema="textSchema"
@@ -19,6 +21,12 @@
             name="dob"
             :schema="objectSchema"
             v-model="dob"
+          />
+
+          <NxBFormSchemaObjectField
+            name="colour"
+            :schema="nestedObjectSchema"
+            v-model="nestedObject"
           />
 
           <b-button type="submit">Submit</b-button>
@@ -57,6 +65,27 @@ const objectSchema = {
   },
 };
 
+const nestedObjectSchema = {
+  type: "object",
+  label: "colour",
+  fields: {
+    blue: {
+      type: "string",
+      label: "Blue",
+    },
+    black: {
+      type: "object",
+      label: "Black",
+      fields: {
+        darkBlack: {
+          type: "string",
+          label: "Dark Black",
+        },
+      },
+    },
+  },
+};
+
 export default {
   components: {
     ValidationObserver,
@@ -70,8 +99,15 @@ export default {
         day: "",
         month: "",
       },
+      nestedObject: {
+        blue: "",
+        black: {
+          darkBlack: "",
+        },
+      },
       textSchema,
       objectSchema,
+      nestedObjectSchema,
     };
   },
   methods: {
