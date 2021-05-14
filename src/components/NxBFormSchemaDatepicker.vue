@@ -1,9 +1,11 @@
 <template>
   <BInputGroup>
+    {{ validationContext.state }}
     <BFormInput
       type="text"
       v-model="localValue"
-      placeholder="YYYY-MM-DD"
+      placeholder="DD-MM-YYYY"
+      :state="validationContext.state"
     ></BFormInput>
     <BInputGroupAppend>
       <BFormDatepicker v-model="localValue" button-only right></BFormDatepicker>
@@ -30,6 +32,7 @@ export default {
     name: {},
     schema: {},
     value: {},
+    validationContext: {},
   },
   computed: {
     localValue: {

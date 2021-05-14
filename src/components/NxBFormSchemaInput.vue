@@ -4,6 +4,7 @@
     :placeholder="schema.placeholder"
     :value="value"
     @input="$listeners.input"
+    :state="validationContext.state"
   />
 </template>
 
@@ -18,6 +19,7 @@ export default {
     name: {},
     schema: {},
     value: {},
+    validationContext: {},
   },
 };
 </script>
