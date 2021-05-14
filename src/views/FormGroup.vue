@@ -41,6 +41,21 @@
             />
           </NxBFormGroup>
 
+          <NxBFormGroup
+            name="datetime"
+            label="Date time"
+            :rules="{
+              date: { format: 'DD-MM-YYYY' },
+            }"
+            v-slot="{ state }"
+          >
+            <b-form-input
+              v-model="form.datetime"
+              :state="state"
+              name="datetime"
+            />
+          </NxBFormGroup>
+
           <b-button type="submit">Submit</b-button>
         </b-form>
       </ValidationObserver>
