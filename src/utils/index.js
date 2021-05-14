@@ -10,25 +10,35 @@ import { curry } from "lodash/fp";
  * - in addtional to any bootstrap vue form element
  * - please create a new schema component that map the schema object to the bootstrap vue component
  */
-export const createSchemaField = curry(function (FormGroup, FormInput) {
+export const createSchemaField = curry(function (
+  FormGroup,
+  FormInput,
+  options = {}
+) {
   return {
     render() {
       return (
         <FormGroup
           name={this.name}
           label={this.schema.label}
-          rules={[]}
+          rules={options.rules}
           required={this.schema.required}
-          attrs={this.groupAttrs}
-        >
-          <FormInput
-            name={this.name}
-            schema={this.schema}
-            value={this.value}
-            attrs={this.inputAttrs}
-            on={this.$listeners}
-          />
-        </FormGroup>
+          scopedSlots={{
+            default: (validationContext) => {
+              return (
+                <FormInput
+                  name={this.name}
+                  schema={this.schema}
+                  value={this.value}
+                  on={{
+                    input: this.$listeners.input,
+                  }}
+                  validationContext={validationContext}
+                />
+              );
+            },
+          }}
+        ></FormGroup>
       );
     },
     props: {
