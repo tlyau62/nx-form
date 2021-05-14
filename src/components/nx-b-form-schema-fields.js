@@ -1,10 +1,10 @@
 import { createSchemaField } from "../utils";
-import { BFormGroup } from "bootstrap-vue";
+import NxBFormGroup from "./NxBFormGroup";
 import NxBFormSchemaInput from "./NxBFormSchemaInput";
 import NxBFormSchemeObject from "./NxBFormSchemeObject";
 import NxBFormSchemaDatepicker from "./NxBFormSchemaDatepicker";
 
-export const createSchemaFieldWitBFormGroup = createSchemaField(BFormGroup);
+export const createSchemaFieldWitBFormGroup = createSchemaField(NxBFormGroup);
 
 export const NxBFormSchemaTextField =
   createSchemaFieldWitBFormGroup(NxBFormSchemaInput);
