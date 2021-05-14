@@ -1,6 +1,5 @@
 <template>
   <BInputGroup>
-    {{ validationContext.state }}
     <BFormInput
       type="text"
       v-model="localValue"
