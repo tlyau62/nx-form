@@ -16,7 +16,7 @@ export const NxBFormSchemaDatepickerField = createSchemaFieldWitBFormGroup(
   NxBFormSchemaDatepicker,
   {
     rules: {
-      date: { format: "DD-MM-YYYY" },
+      date: { format: "YYYY-MM-DD" },
     },
   }
 );
