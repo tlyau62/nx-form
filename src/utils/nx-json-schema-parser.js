@@ -2,7 +2,6 @@ import { mapValues, omit, omitBy, isArray } from "lodash";
 
 export const visitor = () => ({
   prop(prop) {
-    debugger;
     this.value(
       {
         type: isArray(prop.type) ? prop.type[0] : prop.type,
