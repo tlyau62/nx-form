@@ -1,8 +1,7 @@
 <template>
   <div>
-    <component
-      v-for="[name, field, component] of fields"
-      :is="component"
+    <NxBFormSchemaField
+      v-for="[name, field] of fields"
       :key="name"
       :name="name"
       :schema="field"
@@ -13,10 +12,13 @@
 
 <script>
 import { isPlainObject, clone } from "lodash/fp";
-import { mapTypeToComponent } from "./nx-b-form-schema-fields";
 import { createSchemaModelWithDefault } from "../utils";
+import NxBFormSchemaField from "./NxBFormSchemaField";
 
 export default {
+  components: {
+    NxBFormSchemaField,
+  },
   props: {
     name: {},
     schema: {},
@@ -35,10 +37,7 @@ export default {
         : this.localValue;
     },
     fields() {
-      return Object.entries(this.schema.fields).map((entry) => [
-        ...entry,
-        mapTypeToComponent(entry[1]),
-      ]);
+      return Object.entries(this.schema.fields);
     },
   },
   watch: {
