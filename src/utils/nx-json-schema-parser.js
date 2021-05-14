@@ -2,11 +2,10 @@ import { mapValues, omit, omitBy, isArray } from "lodash";
 
 export const visitor = () => ({
   prop(prop) {
-    this.value(
+    this.setValue(
       {
         type: isArray(prop.type) ? prop.type[0] : prop.type,
         label: prop.title,
-        required: prop.required,
         fields: prop.properties,
       },
       "fields"
@@ -17,57 +16,59 @@ export const visitor = () => ({
 export class JsonSchemaModel {
   constructor(value) {
     this._value = null;
-    this._propKey = null;
+    this._propKey = "properties";
     this._children = null;
 
-    this.value(value, "properties");
+    this.setValue(value, "properties");
   }
 
-  value(value, propKey = "properties") {
-    if (value === undefined) {
-      return this._value;
-    }
+  getValue() {
+    return this._value;
+  }
 
-    this.propKey(propKey);
-    this.children(
+  setValue(value, propKey) {
+    this._value = omitBy(value, (value) => value === undefined);
+    this.setChildren(
       mapValues(value[propKey] || {}, (prop) => new JsonSchemaModel(prop))
     );
-    this._value = omitBy(value, (value) => value === undefined);
     this._value = omit(value, propKey);
+    this.setPropKey(propKey);
   }
 
-  propKey(propKey) {
-    if (propKey === undefined) {
-      return this._propKey;
-    }
+  getPropKey() {
+    return this._propKey;
+  }
 
+  setPropKey(propKey) {
     this._propKey = propKey;
   }
 
-  children(children) {
-    if (children === undefined) {
-      return this._children;
-    }
+  getChildren() {
+    return this._children;
+  }
 
+  setChildren(children) {
     this._children = children;
   }
 
-  get hasChildren() {
+  hasChildren() {
     return Object.keys(this._children).length > 0;
   }
 
   export() {
     return {
-      ...this.value(),
-      [this.propKey()]: mapValues(this.children(), (child) => child.export()),
+      ...this.getValue(),
+      [this.getPropKey()]: mapValues(this.getChildren(), (child) =>
+        child.export()
+      ),
     };
   }
 }
 
 export const traverse = (model, visitor) => {
-  visitor.prop.call(model, model.value());
+  visitor.prop.call(model, model.export());
 
-  for (const child of Object.values(model.children())) {
+  for (const child of Object.values(model.getChildren())) {
     traverse(child, visitor);
   }
 };
@@ -77,7 +78,5 @@ export const parseJsonSchema = (jsonSchema) => {
 
   traverse(parsed, visitor());
 
-  return {
-    root: parsed.export(),
-  };
+  return parsed.export();
 };

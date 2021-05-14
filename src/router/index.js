@@ -29,6 +29,11 @@ const routes = [
     name: "FormSchema",
     component: () => import("../views/FormSchema.vue"),
   },
+  {
+    path: "/form-json-schema",
+    name: "FormJsonSchema",
+    component: () => import("../views/FormJsonSchema.vue"),
+  },
 ];
 
 const router = new VueRouter({
