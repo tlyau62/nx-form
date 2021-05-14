@@ -1,8 +1,14 @@
 import { extend } from "vee-validate";
 import * as rules from "vee-validate/dist/rules";
+import * as customRules from "./custom";
 
-Object.keys(rules).forEach((rule) => {
+const aggregateRules = {
+  ...rules,
+  ...customRules,
+};
+
+Object.keys(aggregateRules).forEach((rule) => {
   extend(rule, {
-    ...rules[rule], // copies rule configuration
+    ...aggregateRules[rule], // copies rule configuration
   });
 });
