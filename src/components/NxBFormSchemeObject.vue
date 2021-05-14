@@ -24,6 +24,7 @@ import {
   clone,
   mapValues,
 } from "lodash/fp";
+import { equalType } from "../utils";
 
 export default {
   props: {
@@ -70,27 +71,7 @@ export default {
       this.localValue = createSchemaModelWithDefault(schema, this.value);
     },
   },
-  beforeCreate() {
-    this.$options.components.NxBFormSchemaTextField =
-      require("./nx-b-form-schema-fields").NxBFormSchemaTextField;
-
-    this.$options.components.NxBFormSchemaObjectField =
-      require("./nx-b-form-schema-fields").NxBFormSchemaObjectField;
-
-    this.$options.components.NxBFormSchemaDatepickerField =
-      require("./nx-b-form-schema-fields").NxBFormSchemaDatepickerField;
-  },
 };
-
-export const equalType = curry((type, value) =>
-  compose(eq(type), prop("type"))(value)
-);
-
-export const mapTypeToComponent = cond([
-  [equalType("object"), constant("NxBFormSchemaObjectField")],
-  [equalType("datetime"), constant("NxBFormSchemaDatepickerField")],
-  [T, constant("NxBFormSchemaTextField")],
-]);
 
 export const createSchemaModel = cond([
   [

@@ -1,4 +1,4 @@
-import { curry } from "lodash/fp";
+import { compose, curry, eq, prop } from "lodash/fp";
 
 /**
  * Wrap a form input element to schema field
@@ -53,3 +53,12 @@ export const createSchemaField = curry(function (
     },
   };
 });
+
+/**
+ * Get schema field type
+ *
+ * For both nx-form schema and json schema
+ */
+export const equalType = curry((type, value) =>
+  compose(eq(type), prop("type"))(value)
+);

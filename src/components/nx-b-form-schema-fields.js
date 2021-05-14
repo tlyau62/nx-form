@@ -3,6 +3,7 @@ import NxBFormGroup from "./NxBFormGroup";
 import NxBFormSchemaInput from "./NxBFormSchemaInput";
 import NxBFormSchemeObject from "./NxBFormSchemeObject";
 import NxBFormSchemaDatepicker from "./NxBFormSchemaDatepicker";
+import { equalType } from "../utils";
 
 export const createSchemaFieldWitBFormGroup = createSchemaField(NxBFormGroup);
 
