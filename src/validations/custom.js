@@ -16,7 +16,6 @@ export const chinese = {
 export const date = {
   params: ["format"],
   validate(value, { format }) {
-    console.log(value);
     return moment(value, format, true).isValid();
   },
 };
