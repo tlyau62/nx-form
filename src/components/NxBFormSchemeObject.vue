@@ -76,6 +76,9 @@ export default {
 
     this.$options.components.NxBFormSchemaObjectField =
       require("./nx-b-form-schema-fields").NxBFormSchemaObjectField;
+
+    this.$options.components.NxBFormSchemaDatepickerField =
+      require("./nx-b-form-schema-fields").NxBFormSchemaDatepickerField;
   },
 };
 
@@ -85,6 +88,7 @@ export const equalType = curry((type, value) =>
 
 export const mapTypeToComponent = cond([
   [equalType("object"), constant("NxBFormSchemaObjectField")],
+  [equalType("datetime"), constant("NxBFormSchemaDatepickerField")],
   [T, constant("NxBFormSchemaTextField")],
 ]);
 
