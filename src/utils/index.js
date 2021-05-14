@@ -1,4 +1,14 @@
-import { compose, curry, eq, prop } from "lodash/fp";
+import {
+  compose,
+  curry,
+  T,
+  cond,
+  constant,
+  isPlainObject,
+  mapValues,
+  eq,
+  prop,
+} from "lodash/fp";
 
 /**
  * Wrap a form input element to schema field
@@ -61,4 +71,58 @@ export const createSchemaField = curry(function (
  */
 export const equalType = curry((type, value) =>
   compose(eq(type), prop("type"))(value)
+);
+
+export const createSchemaModel = cond([
+  [
+    equalType("object"),
+    (scheme) => createSchemaModelOnObjectType(scheme.fields),
+  ],
+  [T, constant(undefined)],
+]);
+
+export const createSchemaModelOnObjectType = mapValues((v) =>
+  createSchemaModel(v)
+);
+
+export const createSchemaModelWithDefault = (schema, defaultValue) =>
+  compose(projectDeep(defaultValue), createSchemaModel)(schema);
+
+export const project = curry((source, target) =>
+  cond([
+    [
+      isPlainObject,
+      (target) =>
+        Object.entries(target).reduce(
+          (a, [k, v]) =>
+            Object.assign(a, {
+              [k]: v ?? (source[k] || {}),
+            }),
+          {}
+        ),
+    ],
+    [T, constant(source)],
+  ])(target)
+);
+
+/**
+ * Project value on source to target
+ *
+ * mapValues not work on undefined value
+ */
+export const projectDeep = curry((source, target) =>
+  cond([
+    [
+      isPlainObject,
+      (target) =>
+        Object.entries(target).reduce(
+          (a, [k, v]) =>
+            Object.assign(a, {
+              [k]: v ? projectDeep(source[k] || [], v) : source[k],
+            }),
+          {}
+        ),
+    ],
+    [T, constant(source)],
+  ])(target)
 );
