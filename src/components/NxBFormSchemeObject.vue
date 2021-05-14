@@ -16,14 +16,13 @@ import {
   compose,
   curry,
   T,
-  eq,
-  prop,
   cond,
   constant,
   isPlainObject,
   clone,
   mapValues,
 } from "lodash/fp";
+import { mapTypeToComponent } from "./nx-b-form-schema-fields";
 import { equalType } from "../utils";
 
 export default {
