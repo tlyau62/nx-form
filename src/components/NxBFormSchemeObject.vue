@@ -13,11 +13,10 @@
 <script>
 import { isPlainObject, clone } from "lodash/fp";
 import { createSchemaModelWithDefault } from "../utils";
-import NxBFormSchemaField from "./NxBFormSchemaField";
 
 export default {
   components: {
-    NxBFormSchemaField,
+    NxBFormSchemaField: () => import("./NxBFormSchemaField"), // fix circular dep
   },
   props: {
     name: {},

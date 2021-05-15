@@ -9,6 +9,8 @@
 </template>
 
 <script>
+import { mapTypeToComponent } from "./nx-b-form-schema-fields";
+
 export default {
   props: {
     name: {},
@@ -17,9 +19,6 @@ export default {
   },
   computed: {
     component() {
-      const mapTypeToComponent =
-        require("./nx-b-form-schema-fields").mapTypeToComponent;
-
       return mapTypeToComponent(this.schema);
     },
   },
