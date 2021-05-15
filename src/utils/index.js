@@ -73,6 +73,14 @@ export const equalType = curry((type, value) =>
   compose(eq(type), prop("type"))(value)
 );
 
+export const equalFormat = curry((type, value) =>
+  compose(eq(type), prop("format"))(value)
+);
+
+export const equalTypeAndFormat = curry(
+  (type, format, value) => equalType(type, value) && equalFormat(format, value)
+);
+
 export const createSchemaModel = cond([
   [
     equalType("object"),
