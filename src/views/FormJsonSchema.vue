@@ -34,6 +34,10 @@ const jsonSchema = {
       type: "string",
       title: "Longitude",
     },
+    testInt: {
+      type: "integer",
+      title: "Test integer",
+    },
   },
 };
 
