@@ -5,6 +5,7 @@
       v-model="localValue"
       placeholder="DD-MM-YYYY"
       :state="validationContext.state"
+      :name="name"
     ></BFormInput>
     <BInputGroupAppend>
       <BFormDatepicker v-model="localValue" button-only right></BFormDatepicker>
