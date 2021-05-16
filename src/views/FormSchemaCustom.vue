@@ -5,13 +5,9 @@
         <b-form @submit.prevent="handleSubmit(submit($event))">
           <h5>Form design 2</h5>
 
-          <p>{{ address }}</p>
-
-          <p>{{ dob }}</p>
-
           <p>{{ nestedObject }}</p>
 
-          <NxBFormSchemaForm
+          <FormSchemaCustomForm
             name="colour"
             :schema="nestedObjectSchema"
             v-model="nestedObject"
@@ -26,29 +22,7 @@
 
 <script>
 import { ValidationObserver } from "vee-validate";
-import { NxBFormSchemaForm } from "../components/nx-b-form-schema-fields";
-
-const textSchema = {
-  type: "string",
-  label: "Address",
-  required: true,
-  placeholder: "Please input some text...",
-};
-
-const objectSchema = {
-  type: "object",
-  label: "DOB",
-  fields: {
-    day: {
-      type: "string",
-      label: "Day",
-    },
-    month: {
-      type: "string",
-      label: "Month",
-    },
-  },
-};
+import FormSchemaCustomForm from "./FormSchemaCustom/FormSchemaCustomForm";
 
 const nestedObjectSchema = {
   type: "object",
@@ -71,57 +45,29 @@ const nestedObjectSchema = {
           label: "Date Black",
           format: "date-time",
         },
+        treeObjectId: {
+          type: "integer",
+          label: "Tree object id",
+          format: "tree-object-id",
+        },
       },
     },
   },
 };
 
-// export const mapTypeToComponent = cond([
-//   [equalType("object"), constant(NxBFormSchemaObjectField)],
-//   [equalType("integer"), constant(NxBFormSchemaIntegerField)],
-//   [
-//     equalTypeAndFormat("string", "date-time"),
-//     constant(NxBFormSchemaDatepickerField),
-//   ],
-//   [equalType("string"), constant(NxBFormSchemaTextField)],
-//   [T, constant(null)],
-// ]);
-
-// const visitor = {
-//   fields: {
-//     "folder.id"() {
-//       return TreeObjectField;
-//     },
-//   },
-//   type: {
-//     integer(prop) {
-//       if (prop.format === "tree-object") return TreeObjectField;
-//     },
-//   },
-// };
-
-// const CustomSchemaField = createSchemaField(visitor);
-
 export default {
   components: {
     ValidationObserver,
-    NxBFormSchemaForm,
+    FormSchemaCustomForm,
   },
   data() {
     return {
-      address: "asdf",
-      dob: {
-        day: "",
-        month: "",
-      },
       nestedObject: {
         blue: "",
         black: {
           darkBlack: "",
         },
       },
-      textSchema,
-      objectSchema,
       nestedObjectSchema,
     };
   },
