@@ -5,7 +5,8 @@
       <router-link to="/about">About</router-link> |
       <router-link to="/form-group">Form group</router-link> |
       <router-link to="/form-schema">Form schema</router-link> |
-      <router-link to="/form-json-schema">Form json schema</router-link>
+      <router-link to="/form-json-schema">Form json schema</router-link> |
+      <router-link to="/form-schema-custom">Form schema custom</router-link>
     </div>
     <router-view />
   </div>

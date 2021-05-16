@@ -30,6 +30,11 @@ const routes = [
     component: () => import("../views/FormSchema.vue"),
   },
   {
+    path: "/form-schema-custom",
+    name: "FormSchemaCustom",
+    component: () => import("../views/FormSchemaCustom.vue"),
+  },
+  {
     path: "/form-json-schema",
     name: "FormJsonSchema",
     component: () => import("../views/FormJsonSchema.vue"),
