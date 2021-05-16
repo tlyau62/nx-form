@@ -1,19 +1,52 @@
 import { isPlainObject, clone } from "lodash/fp";
 import { createSchemaModelWithDefault, equalType } from "../utils";
 
-const NxBFormSchemeObject = (mapTypeToComponent) => {
-  const nxBFormSchemeObject = {
+const nxBFormSchemaForm = (mapTypeToComponent) => {
+  const NxBFormSchemaField = (() => ({
     render() {
-      const children = this.fields
-        .map(([name, field]) => [name, field, this.mapTypeToComponent(field)])
-        .map(([name, field, SchemaField]) => (
-          <SchemaField
-            key={name}
-            name={name}
-            schema={field}
-            vModel={this.localValue[name]}
-          />
-        ));
+      const Component = this.mapTypeToComponent();
+
+      return (
+        <Component
+          key={this.name}
+          name={this.name}
+          schema={this.schema}
+          value={this.value}
+          on={{ ...this.$listeners }}
+        />
+      );
+    },
+    props: {
+      name: {},
+      schema: {},
+      value: {},
+    },
+    methods: {
+      mapTypeToComponent() {
+        const field = this.schema;
+
+        if (equalType("object", field)) {
+          return NxBFormSchemeObject;
+        }
+
+        return mapTypeToComponent(field);
+      },
+    },
+  }))();
+
+  const NxBFormSchemeObject = (() => ({
+    components: {
+      NxBFormSchemaField,
+    },
+    render() {
+      const children = this.fields.map(([name, field]) => (
+        <NxBFormSchemaField
+          key={name}
+          name={name}
+          schema={field}
+          vModel={this.localValue[name]}
+        />
+      ));
 
       return <div>{children}</div>;
     },
@@ -58,18 +91,12 @@ const NxBFormSchemeObject = (mapTypeToComponent) => {
         this.localValue = createSchemaModelWithDefault(schema, this.value);
       },
     },
-    methods: {
-      mapTypeToComponent(field) {
-        if (equalType("object", field)) {
-          return nxBFormSchemeObject;
-        }
+  }))();
 
-        return mapTypeToComponent(field);
-      },
-    },
+  return {
+    NxBFormSchemaForm: NxBFormSchemaField,
+    NxBFormSchemeObject,
   };
-
-  return nxBFormSchemeObject;
 };
 
-export default NxBFormSchemeObject;
+export default nxBFormSchemaForm;
