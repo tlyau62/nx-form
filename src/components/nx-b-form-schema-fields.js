@@ -3,6 +3,7 @@ import NxBFormGroup from "./NxBFormGroup";
 import NxBFormSchemaInput from "./NxBFormSchemaInput";
 import NxBFormSchemeObject from "./NxBFormSchemeObject";
 import NxBFormSchemaDatepicker from "./NxBFormSchemaDatepicker";
+import NxBFormSchemaInteger from "./NxBFormSchemaInteger";
 import { T, cond, constant } from "lodash/fp";
 import { equalType, equalTypeAndFormat } from "../utils";
 
@@ -24,7 +25,7 @@ export const NxBFormSchemaDatepickerField = createSchemaFieldWitBFormGroup(
 );
 
 export const NxBFormSchemaIntegerField = createSchemaFieldWitBFormGroup(
-  NxBFormSchemaInput,
+  NxBFormSchemaInteger,
   {
     rules: {
       numeric: true,
@@ -40,5 +41,5 @@ export const mapTypeToComponent = cond([
     constant(NxBFormSchemaDatepickerField),
   ],
   [equalType("string"), constant(NxBFormSchemaTextField)],
-  [T, constant(NxBFormSchemaTextField)],
+  [T, constant(null)],
 ]);
