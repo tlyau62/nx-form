@@ -1,20 +1,16 @@
 import { createSchemaField } from "../utils";
 import NxBFormGroup from "./NxBFormGroup";
 import NxBFormSchemaInput from "./NxBFormSchemaInput";
-import NxBFormSchemeObject from "./NxBFormSchemeObject";
 import NxBFormSchemaDatepicker from "./NxBFormSchemaDatepicker";
 import NxBFormSchemaInteger from "./NxBFormSchemaInteger";
 import { T, cond, constant } from "lodash/fp";
 import { equalType, equalTypeAndFormat } from "../utils";
-import NxBFormSchemaField from "./NxBFormSchemeObject.js";
+import nxBFormSchemaForm from "./nxBFormSchemaForm.js";
 
 export const createSchemaFieldWitBFormGroup = createSchemaField(NxBFormGroup);
 
 export const NxBFormSchemaTextField =
   createSchemaFieldWitBFormGroup(NxBFormSchemaInput);
-
-export const NxBFormSchemaObjectField =
-  createSchemaFieldWitBFormGroup(NxBFormSchemeObject);
 
 export const NxBFormSchemaDatepickerField = createSchemaFieldWitBFormGroup(
   NxBFormSchemaDatepicker,
@@ -35,7 +31,7 @@ export const NxBFormSchemaIntegerField = createSchemaFieldWitBFormGroup(
 );
 
 export const mapTypeToComponent = cond([
-  [equalType("object"), constant(NxBFormSchemaObjectField)],
+  [equalType("object"), constant(NxBFormGroup)],
   [equalType("integer"), constant(NxBFormSchemaIntegerField)],
   [
     equalTypeAndFormat("string", "date-time"),
@@ -45,14 +41,8 @@ export const mapTypeToComponent = cond([
   [T, constant(null)],
 ]);
 
-export const mapTypeToComponentNoObject = cond([
-  [equalType("integer"), constant(NxBFormSchemaIntegerField)],
-  [
-    equalTypeAndFormat("string", "date-time"),
-    constant(NxBFormSchemaDatepickerField),
-  ],
-  [equalType("string"), constant(NxBFormSchemaTextField)],
-  [T, constant(null)],
-]);
+export const { NxBFormSchemaForm, NxBFormSchemeObject } =
+  nxBFormSchemaForm(mapTypeToComponent);
 
-export const NxBFormSchemaForm = NxBFormSchemaField(mapTypeToComponentNoObject);
+export const NxBFormSchemaObjectField =
+  createSchemaFieldWitBFormGroup(NxBFormSchemeObject);
