@@ -1,8 +1,13 @@
 import { isPlainObject, clone } from "lodash/fp";
-import { createSchemaModelWithDefault, equalType } from "../utils";
+import {
+  createSchemaModelWithDefault,
+  equalType,
+  createSchemaField,
+} from "../utils";
+import NxBFormGroup from "./NxBFormGroup";
 
 const NxBFormSchemeObject = (mapTypeToComponent) => {
-  const nxBFormSchemeObject = {
+  const nxBFormSchemeObject = createSchemaField(NxBFormGroup, {
     render() {
       const children = this.fields
         .map(([name, field]) => [name, field, this.mapTypeToComponent(field)])
@@ -67,7 +72,7 @@ const NxBFormSchemeObject = (mapTypeToComponent) => {
         return mapTypeToComponent(field);
       },
     },
-  };
+  });
 
   return nxBFormSchemeObject;
 };
