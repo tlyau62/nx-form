@@ -45,6 +45,11 @@ const nestedObjectSchema = {
           format: "date-time",
           label: "Date Black",
         },
+        treeObj: {
+          type: "integer",
+          format: "tree-object-id",
+          label: "Tree Object id",
+        },
       },
     },
   },
@@ -57,7 +62,13 @@ export default {
   },
   data() {
     return {
-      nestedObject: {},
+      nestedObject: {
+        black: {
+          darkBlack: "testetst",
+          dateBlack: "10-10-1999",
+          treeObj: 2,
+        },
+      },
       nestedObjectSchema,
     };
   },

@@ -1,8 +1,7 @@
 <template>
   <b-form-radio-group
     :name="name"
-    :value="value"
-    @input="$listeners.input"
+    v-model="localValue"
     :state="validationContext.state"
     :options="options"
   />
@@ -26,6 +25,14 @@ export default {
       return "File1.txt|Mypdf.pdf|test.mp3|xxx.mp4"
         .split("|")
         .map((text, value) => ({ value, text }));
+    },
+    localValue: {
+      get() {
+        return this.value;
+      },
+      set(val) {
+        this.$emit("input", val);
+      },
     },
   },
 };
