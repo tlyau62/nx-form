@@ -1,5 +1,5 @@
 <template>
-  <NxBFormSchemaField
+  <NxBFormSchemaForm
     :name="name"
     :schema="jsonSchema"
     :value="value"
@@ -8,12 +8,12 @@
 </template>
 
 <script>
-import NxBFormSchemaField from "./NxBFormSchemaField";
+import { NxBFormSchemaForm } from "./nx-b-form-schema-fields";
 import { parseJsonSchema } from "../utils/nx-json-schema-parser";
 
 export default {
   components: {
-    NxBFormSchemaField,
+    NxBFormSchemaForm,
   },
   props: {
     name: {},
