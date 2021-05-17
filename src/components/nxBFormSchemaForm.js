@@ -1,18 +1,21 @@
 import { isPlainObject, clone } from "lodash/fp";
-import { createSchemaModelWithDefault, equalType } from "../utils";
+import {
+  createSchemaModelWithDefault,
+  equalType,
+  createSchemaField,
+} from "../utils";
 
 const nxBFormSchemaForm = (mapTypeToComponent) => {
   const NxBFormSchemaField = (() => ({
     render() {
-      const Component = this.mapTypeToComponent();
+      const Component = this.getComponent();
 
       return (
         <Component
-          key={this.name}
           name={this.name}
           schema={this.schema}
           value={this.value}
-          on={{ ...this.$listeners }}
+          on={{ input: this.$listeners.input }}
         />
       );
     },
@@ -22,14 +25,15 @@ const nxBFormSchemaForm = (mapTypeToComponent) => {
       value: {},
     },
     methods: {
-      mapTypeToComponent() {
-        const field = this.schema;
+      getComponent() {
+        const schema = this.schema;
+        const component = mapTypeToComponent(schema);
 
-        if (equalType("object", field)) {
-          return NxBFormSchemeObject;
+        if (equalType("object", schema)) {
+          return createSchemaField(component, NxBFormSchemeObject);
         }
 
-        return mapTypeToComponent(field);
+        return component;
       },
     },
   }))();

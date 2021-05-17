@@ -31,6 +31,7 @@ export const NxBFormSchemaIntegerField = createSchemaFieldWitBFormGroup(
 );
 
 export const mapTypeToComponent = cond([
+  [equalType("object"), constant(NxBFormGroup)],
   [equalType("integer"), constant(NxBFormSchemaIntegerField)],
   [
     equalTypeAndFormat("string", "date-time"),
