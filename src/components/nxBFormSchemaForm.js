@@ -1,4 +1,4 @@
-import { isPlainObject, clone } from "lodash/fp";
+import { isPlainObject, clone, memoize } from "lodash/fp";
 import {
   createSchemaModelWithDefault,
   equalType,
@@ -6,6 +6,10 @@ import {
 } from "../utils";
 
 const nxBFormSchemaForm = (mapTypeToComponent) => {
+  const memoizeCreateSchemaField = memoize((component, NxBFormSchemeObject) =>
+    createSchemaField(component, NxBFormSchemeObject)
+  );
+
   const NxBFormSchemaField = (() => ({
     render() {
       const Component = this.getComponent();
@@ -30,7 +34,7 @@ const nxBFormSchemaForm = (mapTypeToComponent) => {
         const component = mapTypeToComponent(schema);
 
         if (equalType("object", schema)) {
-          return createSchemaField(component, NxBFormSchemeObject);
+          return memoizeCreateSchemaField(component, NxBFormSchemeObject); // create field here will cause inifinite recursion, please check form-field-inf-recur branch
         }
 
         return component;

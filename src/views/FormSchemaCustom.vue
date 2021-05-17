@@ -32,6 +32,21 @@ const nestedObjectSchema = {
       type: "string",
       label: "Blue",
     },
+    black: {
+      type: "object",
+      label: "Black",
+      fields: {
+        darkBlack: {
+          type: "string",
+          label: "Dark Black",
+        },
+        dateBlack: {
+          type: "string",
+          format: "date-time",
+          label: "Date Black",
+        },
+      },
+    },
   },
 };
 
@@ -42,9 +57,7 @@ export default {
   },
   data() {
     return {
-      nestedObject: {
-        blue: "",
-      },
+      nestedObject: {},
       nestedObjectSchema,
     };
   },
