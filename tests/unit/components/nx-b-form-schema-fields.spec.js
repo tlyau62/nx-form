@@ -158,7 +158,7 @@ describe("nx-b-form-schema-fields.js", () => {
       });
     });
 
-    it.only("accepts a null value with a object schema", async () => {
+    it("accepts a null value with a object schema", async () => {
       const schema = {
         type: "object",
         fields: {
