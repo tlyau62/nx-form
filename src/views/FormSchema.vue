@@ -82,8 +82,9 @@ const nestedObjectSchema = {
           label: "Dark Black",
         },
         dateBlack: {
-          type: "datetime",
+          type: "string",
           label: "Date Black",
+          format: "date-time",
         },
       },
     },
