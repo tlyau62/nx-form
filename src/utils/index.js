@@ -86,7 +86,7 @@ export const createSchemaModel = cond([
     equalType("object"),
     (scheme) => createSchemaModelOnObjectType(scheme.fields),
   ],
-  [T, constant(undefined)],
+  [T, constant(null)],
 ]);
 
 export const createSchemaModelOnObjectType = mapValues((v) =>
@@ -104,7 +104,7 @@ export const project = curry((source, target) =>
         Object.entries(target).reduce(
           (a, [k, v]) =>
             Object.assign(a, {
-              [k]: v ?? (source[k] || {}),
+              [k]: v ?? ((source || {})[k] || {}),
             }),
           {}
         ),
@@ -126,7 +126,9 @@ export const projectDeep = curry((source, target) =>
         Object.entries(target).reduce(
           (a, [k, v]) =>
             Object.assign(a, {
-              [k]: v ? projectDeep(source[k] || [], v) : source[k],
+              [k]: v
+                ? projectDeep((source || {})[k] || {}, v)
+                : (source || {})[k] || null,
             }),
           {}
         ),

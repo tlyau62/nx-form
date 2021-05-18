@@ -65,8 +65,8 @@ const nxBFormSchemaForm = (mapTypeToComponent) => {
     },
     data() {
       return {
-        localValue: null,
-        cacheValue: null,
+        localValue: {},
+        cacheValue: {},
       };
     },
     computed: {

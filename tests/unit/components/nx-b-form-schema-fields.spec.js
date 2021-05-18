@@ -135,6 +135,52 @@ describe("nx-b-form-schema-fields.js", () => {
       });
     });
 
+    it("initializes the default null value", async () => {
+      const schema = {
+        type: "object",
+        fields: {
+          blue: {
+            type: "string",
+          },
+          black: {
+            type: "string",
+          },
+        },
+      };
+
+      const wrapper = mount(createWrapper("color", schema, {}));
+
+      await wrapper.vm.$nextTick();
+
+      expect(wrapper.vm.form).toEqual({
+        blue: null,
+        black: null,
+      });
+    });
+
+    // it.only("accepts a null value with a object schema", async () => {
+    //   const schema = {
+    //     type: "object",
+    //     fields: {
+    //       blue: {
+    //         type: "string",
+    //       },
+    //       black: {
+    //         type: "string",
+    //       },
+    //     },
+    //   };
+
+    //   const wrapper = mount(createWrapper("color", schema, {}));
+
+    //   await wrapper.vm.$nextTick();
+
+    //   expect(wrapper.vm.form).toEqual({
+    //     blue: null,
+    //     black: null,
+    //   });
+    // });
+
     it("creates a object field with default value and output a object with a object schema", async () => {
       const schema = {
         type: "object",
