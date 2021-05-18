@@ -1,7 +1,7 @@
 import { NxBFormSchemaForm } from "@/components/nx-b-form-schema-fields";
 import { mount } from "@vue/test-utils";
 import "@/validations";
-import { isPlainObject } from "lodash";
+import { isPlainObject, cloneDeep } from "lodash";
 
 describe("nx-b-form-schema-fields.js", () => {
   describe("NxBFormSchemaForm", function () {
@@ -40,6 +40,21 @@ describe("nx-b-form-schema-fields.js", () => {
       await wrapper.vm.$nextTick();
 
       expect(wrapper.vm.form).toBe("testtest");
+    });
+
+    it("creates a string field with default value and output a string from a string schema", async () => {
+      const schema = {
+        type: "string",
+      };
+
+      const wrapper = mount(createWrapper("address", schema, "123456"));
+      const field = wrapper.find(`input[name='address']`);
+
+      expect(field.exists()).toBe(true);
+
+      await wrapper.vm.$nextTick();
+
+      expect(wrapper.vm.form).toBe("123456");
     });
 
     it("logs the error when the given value is object but the schema type is string", async () => {
@@ -118,6 +133,49 @@ describe("nx-b-form-schema-fields.js", () => {
           darkBlack: "darkBlackValue",
         },
       });
+    });
+
+    it("creates a object field with default value and output a object with a object schema", async () => {
+      const schema = {
+        type: "object",
+        label: "colour",
+        fields: {
+          blue: {
+            type: "string",
+            label: "Blue",
+          },
+          black: {
+            type: "object",
+            label: "Black",
+            fields: {
+              darkBlack: {
+                type: "string",
+                label: "Dark Black",
+              },
+              dateBlack: {
+                type: "string",
+                format: "date-time",
+                label: "Date Black",
+              },
+            },
+          },
+        },
+      };
+
+      const defaultValue = {
+        blue: "blue",
+        black: {
+          darkBlack: "testtest",
+          dateBlack: "02-07-1999",
+        },
+      };
+
+      const wrapper = mount(createWrapper("color", schema, defaultValue));
+
+      await wrapper.vm.$nextTick();
+
+      expect(isPlainObject(wrapper.vm.form)).toBe(true);
+      expect(wrapper.vm.form).toEqual(cloneDeep(defaultValue));
     });
   });
 });
