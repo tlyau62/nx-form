@@ -8,6 +8,7 @@ import {
   mapValues,
   eq,
   prop,
+  propOr,
 } from "lodash/fp";
 
 /**
@@ -104,7 +105,7 @@ export const project = curry((source, target) =>
         Object.entries(target).reduce(
           (a, [k, v]) =>
             Object.assign(a, {
-              [k]: v ?? ((source || {})[k] || {}),
+              [k]: v ?? propOr(null, k, source),
             }),
           {}
         ),
@@ -127,8 +128,8 @@ export const projectDeep = curry((source, target) =>
           (a, [k, v]) =>
             Object.assign(a, {
               [k]: v
-                ? projectDeep((source || {})[k] || {}, v)
-                : (source || {})[k] || null,
+                ? projectDeep(propOr({}, k, source), v)
+                : propOr(null, k, source),
             }),
           {}
         ),
