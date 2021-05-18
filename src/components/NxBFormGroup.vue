@@ -12,7 +12,8 @@
         }"
       />
 
-      <b-form-invalid-feedback>{{
+      <!-- need state prop: https://github.com/bootstrap-vue/bootstrap-vue/issues/3269 -->
+      <b-form-invalid-feedback :state="getValidationState(validationContext)">{{
         validationContext.errors[0]
       }}</b-form-invalid-feedback>
     </component>
