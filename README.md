@@ -27,3 +27,8 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+## TODOS
+- mixin for (name, schema, value)
+- add example on customizing group
+- add checkbox and radio button for backend json schema
