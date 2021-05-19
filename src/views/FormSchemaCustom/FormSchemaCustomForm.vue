@@ -9,7 +9,7 @@ import {
   NxBFormSchemaNxBFormGroup,
   mapTypeToComponent as defaultMapTypeToComponent,
 } from "../../components/nx-b-form-schema-fields";
-import nxBFormSchemaForm from "../../components/nxBFormSchemaForm";
+import NxBFormSchemaForm from "../../components/NxBFormSchemaForm";
 import FormSchemaCustomFormTreeObject from "./FormSchemaCustomFormTreeObject";
 
 const mapTypeToComponent = cond([
@@ -23,7 +23,7 @@ const mapTypeToComponent = cond([
 export default {
   components: {
     FormSchemaCustomFormTreeObject:
-      nxBFormSchemaForm(mapTypeToComponent).NxBFormSchemaForm,
+      NxBFormSchemaForm(mapTypeToComponent).NxBFormSchemaForm,
   },
 };
 </script>

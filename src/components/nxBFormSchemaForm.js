@@ -3,7 +3,7 @@ import { createSchemaModelWithDefault, equalType } from "../utils";
 import fieldMixin from "../mixins/field.mixin";
 import NxBFormSchemaGroup from "./NxBFormSchemaGroup";
 
-const nxBFormSchemaForm = (mapTypeToComponent) => {
+const NxBFormSchemaForm = (mapTypeToComponent) => {
   const memoizeNxBFormSchemaGroup = memoize((component, NxBFormSchemeObject) =>
     NxBFormSchemaGroup(component, NxBFormSchemeObject)
   );
@@ -97,4 +97,4 @@ const nxBFormSchemaForm = (mapTypeToComponent) => {
   };
 };
 
-export default nxBFormSchemaForm;
+export default NxBFormSchemaForm;

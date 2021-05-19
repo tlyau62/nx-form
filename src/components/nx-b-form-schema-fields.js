@@ -4,7 +4,6 @@ import NxBFormSchemaDatepicker from "./NxBFormSchemaDatepicker";
 import NxBFormSchemaInteger from "./NxBFormSchemaInteger";
 import { T, cond, constant } from "lodash/fp";
 import { equalType, equalTypeAndFormat } from "../utils";
-import nxBFormSchemaForm from "./nxBFormSchemaForm.js";
 import NxBFormSchemaGroup from "./NxBFormSchemaGroup";
 
 export const NxBFormSchemaNxBFormGroup = NxBFormSchemaGroup(NxBFormGroup);
@@ -42,7 +41,7 @@ export const mapTypeToComponent = cond([
 ]);
 
 export const { NxBFormSchemaForm, NxBFormSchemeObject } =
-  nxBFormSchemaForm(mapTypeToComponent);
+  require("./NxBFormSchemaForm").default(mapTypeToComponent);
 
 export const NxBFormSchemaObjectField =
   NxBFormSchemaNxBFormGroup(NxBFormSchemeObject);
