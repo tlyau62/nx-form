@@ -42,6 +42,8 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
   - bootstrap form element, e.g. b-form-input
   - provide no validation
 
-## TODOS
+## TODOS before release
+- replace nx schema with json schema
+- rename all components by terms
 - add example on customizing group
 - add checkbox and radio button for backend json schema
