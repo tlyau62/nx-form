@@ -10,6 +10,7 @@ import {
   prop,
   propOr,
 } from "lodash/fp";
+import fieldMixin from "../mixins/field.mixin";
 
 /**
  * Wrap a form input element to schema field
@@ -27,6 +28,7 @@ export const createSchemaField = curry(function (
   options = {}
 ) {
   return {
+    mixins: [fieldMixin],
     render() {
       return (
         <FormGroup
@@ -51,16 +53,6 @@ export const createSchemaField = curry(function (
           }}
         ></FormGroup>
       );
-    },
-    props: {
-      schema: {
-        type: Object,
-      },
-      name: {
-        type: String,
-        default: "",
-      },
-      value: {},
     },
   };
 });
