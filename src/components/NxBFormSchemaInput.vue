@@ -10,15 +10,14 @@
 
 <script>
 import { BFormInput } from "bootstrap-vue";
+import fieldMixin from "../mixins/field.mixin";
 
 export default {
+  mixins: [fieldMixin],
   components: {
     BFormInput,
   },
   props: {
-    name: {},
-    schema: {},
-    value: {},
     validationContext: {},
   },
 };

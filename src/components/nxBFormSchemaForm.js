@@ -4,6 +4,7 @@ import {
   equalType,
   createSchemaField,
 } from "../utils";
+import fieldMixin from "../mixins/field.mixin";
 
 const nxBFormSchemaForm = (mapTypeToComponent) => {
   const memoizeCreateSchemaField = memoize((component, NxBFormSchemeObject) =>
@@ -11,6 +12,7 @@ const nxBFormSchemaForm = (mapTypeToComponent) => {
   );
 
   const NxBFormSchemaField = (() => ({
+    mixins: [fieldMixin],
     render() {
       const Component = this.getComponent();
 
@@ -22,11 +24,6 @@ const nxBFormSchemaForm = (mapTypeToComponent) => {
           on={{ input: this.$listeners.input }}
         />
       );
-    },
-    props: {
-      name: {},
-      schema: {},
-      value: {},
     },
     methods: {
       getComponent() {
@@ -43,6 +40,7 @@ const nxBFormSchemaForm = (mapTypeToComponent) => {
   }))();
 
   const NxBFormSchemeObject = (() => ({
+    mixins: [fieldMixin],
     components: {
       NxBFormSchemaField,
     },
@@ -57,11 +55,6 @@ const nxBFormSchemaForm = (mapTypeToComponent) => {
       ));
 
       return <div>{children}</div>;
-    },
-    props: {
-      name: {},
-      schema: {},
-      value: {},
     },
     data() {
       return {

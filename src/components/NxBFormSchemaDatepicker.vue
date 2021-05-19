@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import fieldMixin from "../mixins/field.mixin";
 import {
   BInputGroup,
   BFormInput,
@@ -22,6 +23,7 @@ import {
 } from "bootstrap-vue";
 
 export default {
+  mixins: [fieldMixin],
   components: {
     BInputGroup,
     BFormInput,
@@ -29,9 +31,6 @@ export default {
     BFormDatepicker,
   },
   props: {
-    name: {},
-    schema: {},
-    value: {},
     validationContext: {},
   },
   computed: {

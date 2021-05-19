@@ -10,15 +10,12 @@
 <script>
 import { NxBFormSchemaForm } from "./nx-b-form-schema-fields";
 import { parseJsonSchema } from "../utils/nx-json-schema-parser";
+import fieldMixin from "../mixins/field.mixin";
 
 export default {
+  mixins: [fieldMixin],
   components: {
     NxBFormSchemaForm,
-  },
-  props: {
-    name: {},
-    schema: {},
-    value: {},
   },
   computed: {
     jsonSchema() {
