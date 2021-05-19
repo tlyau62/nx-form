@@ -1,14 +1,11 @@
 import { isPlainObject, clone, memoize } from "lodash/fp";
-import {
-  createSchemaModelWithDefault,
-  equalType,
-  createSchemaField,
-} from "../utils";
+import { createSchemaModelWithDefault, equalType } from "../utils";
 import fieldMixin from "../mixins/field.mixin";
+import NxBFormSchemaGroup from "./NxBFormSchemaGroup";
 
 const nxBFormSchemaForm = (mapTypeToComponent) => {
-  const memoizeCreateSchemaField = memoize((component, NxBFormSchemeObject) =>
-    createSchemaField(component, NxBFormSchemeObject)
+  const memoizeNxBFormSchemaGroup = memoize((component, NxBFormSchemeObject) =>
+    NxBFormSchemaGroup(component, NxBFormSchemeObject)
   );
 
   const NxBFormSchemaField = (() => ({
@@ -31,7 +28,7 @@ const nxBFormSchemaForm = (mapTypeToComponent) => {
         const component = mapTypeToComponent(schema);
 
         if (equalType("object", schema)) {
-          return memoizeCreateSchemaField(component, NxBFormSchemeObject); // create field here will cause inifinite recursion, please check form-field-inf-recur branch
+          return memoizeNxBFormSchemaGroup(component, NxBFormSchemeObject); // create field here will cause inifinite recursion, please check form-field-inf-recur branch
         }
 
         return component;

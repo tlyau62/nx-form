@@ -1,4 +1,3 @@
-import { createSchemaField } from "../utils";
 import NxBFormGroup from "./NxBFormGroup";
 import NxBFormSchemaInput from "./NxBFormSchemaInput";
 import NxBFormSchemaDatepicker from "./NxBFormSchemaDatepicker";
@@ -6,13 +5,14 @@ import NxBFormSchemaInteger from "./NxBFormSchemaInteger";
 import { T, cond, constant } from "lodash/fp";
 import { equalType, equalTypeAndFormat } from "../utils";
 import nxBFormSchemaForm from "./nxBFormSchemaForm.js";
+import NxBFormSchemaGroup from "./NxBFormSchemaGroup";
 
-export const createSchemaFieldWitBFormGroup = createSchemaField(NxBFormGroup);
+export const NxBFormSchemaNxBFormGroup = NxBFormSchemaGroup(NxBFormGroup);
 
 export const NxBFormSchemaTextField =
-  createSchemaFieldWitBFormGroup(NxBFormSchemaInput);
+  NxBFormSchemaNxBFormGroup(NxBFormSchemaInput);
 
-export const NxBFormSchemaDatepickerField = createSchemaFieldWitBFormGroup(
+export const NxBFormSchemaDatepickerField = NxBFormSchemaNxBFormGroup(
   NxBFormSchemaDatepicker,
   {
     rules: {
@@ -21,7 +21,7 @@ export const NxBFormSchemaDatepickerField = createSchemaFieldWitBFormGroup(
   }
 );
 
-export const NxBFormSchemaIntegerField = createSchemaFieldWitBFormGroup(
+export const NxBFormSchemaIntegerField = NxBFormSchemaNxBFormGroup(
   NxBFormSchemaInteger,
   {
     rules: {
@@ -45,4 +45,4 @@ export const { NxBFormSchemaForm, NxBFormSchemeObject } =
   nxBFormSchemaForm(mapTypeToComponent);
 
 export const NxBFormSchemaObjectField =
-  createSchemaFieldWitBFormGroup(NxBFormSchemeObject);
+  NxBFormSchemaNxBFormGroup(NxBFormSchemeObject);
