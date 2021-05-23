@@ -31,7 +31,7 @@ export const equalTypeAndFormat = curry(
 export const createSchemaModel = cond([
   [
     equalType("object"),
-    (scheme) => createSchemaModelOnObjectType(scheme.fields),
+    (scheme) => createSchemaModelOnObjectType(scheme.properties),
   ],
   [T, constant(null)],
 ]);

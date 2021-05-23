@@ -42,7 +42,7 @@ const NxBFormSchemaForm = (mapTypeToComponent) => {
       NxBFormSchemaField,
     },
     render() {
-      const children = this.fields.map(([name, field]) => (
+      const children = this.properties.map(([name, field]) => (
         <NxBFormSchemaField
           key={name}
           name={name}
@@ -65,8 +65,8 @@ const NxBFormSchemaForm = (mapTypeToComponent) => {
           ? Object.values(this.localValue)
           : this.localValue;
       },
-      fields() {
-        return Object.entries(this.schema.fields);
+      properties() {
+        return Object.entries(this.schema.properties);
       },
     },
     watch: {

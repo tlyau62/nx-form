@@ -81,7 +81,7 @@ describe("nx-b-form-schema-fields.js", () => {
       const schema = {
         type: "object",
         label: "colour",
-        fields: {
+        properties: {
           blue: {
             type: "string",
             label: "Blue",
@@ -89,7 +89,7 @@ describe("nx-b-form-schema-fields.js", () => {
           black: {
             type: "object",
             label: "Black",
-            fields: {
+            properties: {
               darkBlack: {
                 type: "string",
                 label: "Dark Black",
@@ -138,7 +138,7 @@ describe("nx-b-form-schema-fields.js", () => {
     it("initializes the default null value", async () => {
       const schema = {
         type: "object",
-        fields: {
+        properties: {
           blue: {
             type: "string",
           },
@@ -161,7 +161,7 @@ describe("nx-b-form-schema-fields.js", () => {
     it("accepts a null value with a object schema", async () => {
       const schema = {
         type: "object",
-        fields: {
+        properties: {
           blue: {
             type: "string",
           },
@@ -185,7 +185,7 @@ describe("nx-b-form-schema-fields.js", () => {
       const schema = {
         type: "object",
         label: "colour",
-        fields: {
+        properties: {
           blue: {
             type: "string",
             label: "Blue",
@@ -193,7 +193,7 @@ describe("nx-b-form-schema-fields.js", () => {
           black: {
             type: "object",
             label: "Black",
-            fields: {
+            properties: {
               darkBlack: {
                 type: "string",
                 label: "Dark Black",
@@ -227,19 +227,19 @@ describe("nx-b-form-schema-fields.js", () => {
     it("does not modify any object in v-model", async () => {
       const schema = {
         type: "object",
-        fields: {
+        properties: {
           person: {
             type: "string",
           },
           loveColor: {
             type: "object",
-            fields: {
+            properties: {
               color1: {
                 type: "string",
               },
               color2: {
                 type: "object",
-                fields: {
+                properties: {
                   color2A: {
                     type: "string",
                   },
