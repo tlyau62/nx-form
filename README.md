@@ -43,7 +43,8 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
   - provide no validation
 
 ## TODOS before release
-- replace nx schema with json schema
+- replace NxBFormSchemaForm.js to NxBFormSchemaForm.vue, mapFn as props
 - rename all components by terms
+- test on title, placeholders, descriptions, ...
 - add example on customizing group
 - add checkbox and radio button for backend json schema
