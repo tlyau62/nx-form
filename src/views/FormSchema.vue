@@ -45,45 +45,45 @@ import {
 
 const textSchema = {
   type: "string",
-  label: "Address",
+  title: "Address",
   required: true,
   placeholder: "Please input some text...",
 };
 
 const objectSchema = {
   type: "object",
-  label: "DOB",
-  fields: {
+  title: "DOB",
+  properties: {
     day: {
       type: "string",
-      label: "Day",
+      title: "Day",
     },
     month: {
       type: "string",
-      label: "Month",
+      title: "Month",
     },
   },
 };
 
 const nestedObjectSchema = {
   type: "object",
-  label: "colour",
-  fields: {
+  title: "colour",
+  properties: {
     blue: {
       type: "string",
-      label: "Blue",
+      title: "Blue",
     },
     black: {
       type: "object",
-      label: "Black",
-      fields: {
+      title: "Black",
+      properties: {
         darkBlack: {
           type: "string",
-          label: "Dark Black",
+          title: "Dark Black",
         },
         dateBlack: {
           type: "string",
-          label: "Date Black",
+          title: "Date Black",
           format: "date-time",
         },
       },

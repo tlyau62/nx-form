@@ -9,6 +9,8 @@ import {
   eq,
   prop,
   propOr,
+  isArray,
+  head,
 } from "lodash/fp";
 
 /**
@@ -16,8 +18,14 @@ import {
  *
  * For both nx-form schema and json schema
  */
+export const isType = (type) =>
+  cond([
+    [isArray, compose(eq(type), head)],
+    [T, eq(type)],
+  ]);
+
 export const equalType = curry((type, value) =>
-  compose(eq(type), prop("type"))(value)
+  compose(isType(type), prop("type"))(value)
 );
 
 export const equalFormat = curry((type, value) =>

@@ -1,4 +1,4 @@
-import { curry } from "lodash/fp";
+import { curry, startCase, lowerCase } from "lodash/fp";
 import fieldMixin from "../mixins/field.mixin";
 
 /**
@@ -18,7 +18,7 @@ export default curry(function (FormGroup, FormInput, options = {}) {
       return (
         <FormGroup
           name={this.name}
-          label={this.schema.label}
+          label={this.schema.title || startCase(lowerCase(this.name))}
           rules={options.rules}
           required={this.schema.required}
           scopedSlots={{
