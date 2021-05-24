@@ -11,6 +11,8 @@ import {
   propOr,
   isArray,
   head,
+  includes,
+  negate,
 } from "lodash/fp";
 
 /**
@@ -18,14 +20,14 @@ import {
  *
  * For both nx-form schema and json schema
  */
-export const isType = (type) =>
-  cond([
-    [isArray, compose(eq(type), head)],
-    [T, eq(type)],
-  ]);
-
 export const equalType = curry((type, value) =>
-  compose(isType(type), prop("type"))(value)
+  compose(
+    cond([
+      [isArray, compose(includes(type), head)],
+      [T, eq(type)],
+    ]),
+    prop("type")
+  )(value)
 );
 
 export const equalFormat = curry((type, value) =>
@@ -34,6 +36,14 @@ export const equalFormat = curry((type, value) =>
 
 export const equalTypeAndFormat = curry(
   (type, format, value) => equalType(type, value) && equalFormat(format, value)
+);
+
+export const isRequired = compose(
+  cond([
+    [isArray, negate(includes("null"))],
+    [T, T],
+  ]),
+  prop("type")
 );
 
 export const createSchemaModel = cond([
