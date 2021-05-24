@@ -26,29 +26,29 @@ import FormSchemaCustomForm from "./FormSchemaCustom/FormSchemaCustomForm";
 
 const nestedObjectSchema = {
   type: "object",
-  label: "colour",
-  fields: {
+  title: "colour",
+  properties: {
     blue: {
       type: "string",
-      label: "Blue",
+      title: "Blue",
     },
     black: {
       type: "object",
-      label: "Black",
-      fields: {
+      title: "Black",
+      properties: {
         darkBlack: {
           type: "string",
-          label: "Dark Black",
+          title: "Dark Black",
         },
         dateBlack: {
           type: "string",
           format: "date-time",
-          label: "Date Black",
+          title: "Date Black",
         },
         treeObj: {
           type: "integer",
           format: "tree-object-id",
-          label: "Tree Object id",
+          title: "Tree Object id",
         },
       },
     },
