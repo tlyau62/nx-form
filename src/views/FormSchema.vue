@@ -1,43 +1,40 @@
 <template>
   <div>
     <b-container>
-      <ValidationObserver v-slot="{ handleSubmit }">
-        <b-form @submit.prevent="handleSubmit(submit($event))">
-          <h5>Form design 2</h5>
+      <NxBForm
+        v-slot="{ handleSubmit }"
+        @submit.prevent="handleSubmit(submit($event))"
+      >
+        <h5>Form design 2</h5>
 
-          <p>{{ address }}</p>
+        <p>{{ address }}</p>
 
-          <p>{{ dob }}</p>
+        <p>{{ dob }}</p>
 
-          <p>{{ nestedObject }}</p>
+        <p>{{ nestedObject }}</p>
 
-          <NxBFormSchemaInputField
-            name="address"
-            :schema="textSchema"
-            v-model="address"
-          />
+        <NxBFormSchemaInputField
+          name="address"
+          :schema="textSchema"
+          v-model="address"
+        />
 
-          <NxBFormSchemaObject
-            name="dob"
-            :schema="objectSchema"
-            v-model="dob"
-          />
+        <NxBFormSchemaObject name="dob" :schema="objectSchema" v-model="dob" />
 
-          <NxBFormSchemaObject
-            name="colour"
-            :schema="nestedObjectSchema"
-            v-model="nestedObject"
-          />
+        <NxBFormSchemaObject
+          name="colour"
+          :schema="nestedObjectSchema"
+          v-model="nestedObject"
+        />
 
-          <b-button type="submit">Submit</b-button>
-        </b-form>
-      </ValidationObserver>
+        <b-button type="submit">Submit</b-button>
+      </NxBForm>
     </b-container>
   </div>
 </template>
 
 <script>
-import { ValidationObserver } from "vee-validate";
+import { NxBForm } from "../components/nx-b-form";
 import { NxBFormSchemaObject } from "../components/nx-b-form-schema";
 import { NxBFormSchemaInputField } from "../components/nx-b-form-schema-string-field";
 
@@ -91,7 +88,7 @@ const nestedObjectSchema = {
 
 export default {
   components: {
-    ValidationObserver,
+    NxBForm,
     NxBFormSchemaInputField,
     NxBFormSchemaObject,
   },

@@ -1,39 +1,40 @@
 <template>
   <div>
     <b-container>
-      <ValidationObserver v-slot="{ handleSubmit }">
-        <b-form @submit.prevent="handleSubmit(submit($event))">
-          <h5>Form design 3</h5>
+      <NxBForm
+        @submit.prevent="handleSubmit(submit($event))"
+        v-slot="{ handleSubmit }"
+      >
+        <h5>Form design 3</h5>
 
-          <h6>Test form 1</h6>
+        <h6>Test form 1</h6>
 
-          {{ form }}
+        {{ form }}
 
-          <NxBFormSchemaFieldset
-            name="root"
-            :schema="jsonSchema"
-            v-model="form"
-          />
+        <NxBFormSchemaFieldset
+          name="root"
+          :schema="jsonSchema"
+          v-model="form"
+        />
 
-          <h6>Test form 2</h6>
+        <h6>Test form 2</h6>
 
-          {{ form2 }}
+        {{ form2 }}
 
-          <NxBFormSchemaFieldset
-            name="root"
-            :schema="jsonSchema2"
-            v-model="form2"
-          />
+        <NxBFormSchemaFieldset
+          name="root"
+          :schema="jsonSchema2"
+          v-model="form2"
+        />
 
-          <b-button type="submit">Submit</b-button>
-        </b-form>
-      </ValidationObserver>
+        <b-button type="submit">Submit</b-button>
+      </NxBForm>
     </b-container>
   </div>
 </template>
 
 <script>
-import { ValidationObserver } from "vee-validate";
+import { NxBForm } from "../components/nx-b-form";
 import { NxBFormSchemaFieldset } from "../components/nx-b-form-schema";
 
 const jsonSchema = {
@@ -74,7 +75,7 @@ const jsonSchema2 = {
 
 export default {
   components: {
-    ValidationObserver,
+    NxBForm,
     NxBFormSchemaFieldset,
   },
   data() {

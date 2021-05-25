@@ -1,27 +1,28 @@
 <template>
   <div>
     <b-container>
-      <ValidationObserver v-slot="{ handleSubmit }">
-        <b-form @submit.prevent="handleSubmit(submit($event))">
-          <h5>Form design 2</h5>
+      <NxBForm
+        @submit.prevent="handleSubmit(submit($event))"
+        v-slot="{ handleSubmit }"
+      >
+        <h5>Form design 2</h5>
 
-          <p>{{ nestedObject }}</p>
+        <p>{{ nestedObject }}</p>
 
-          <FormSchemaCustomForm
-            name="colour"
-            :schema="nestedObjectSchema"
-            v-model="nestedObject"
-          />
+        <FormSchemaCustomForm
+          name="colour"
+          :schema="nestedObjectSchema"
+          v-model="nestedObject"
+        />
 
-          <b-button type="submit">Submit</b-button>
-        </b-form>
-      </ValidationObserver>
+        <b-button type="submit">Submit</b-button>
+      </NxBForm>
     </b-container>
   </div>
 </template>
 
 <script>
-import { ValidationObserver } from "vee-validate";
+import { NxBForm } from "../components/nx-b-form";
 import FormSchemaCustomForm from "./FormSchemaCustom/FormSchemaCustomForm";
 
 const nestedObjectSchema = {
@@ -57,7 +58,7 @@ const nestedObjectSchema = {
 
 export default {
   components: {
-    ValidationObserver,
+    NxBForm,
     FormSchemaCustomForm,
   },
   data() {
