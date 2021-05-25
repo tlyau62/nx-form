@@ -52,3 +52,4 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 - add i18n
 - test on title, placeholders, descriptions, ...
 - add example on customizing group
+- add auto complete
