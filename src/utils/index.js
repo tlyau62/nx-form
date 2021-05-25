@@ -46,12 +46,17 @@ export const isRequired = compose(
   prop("type")
 );
 
+export const getSchemaDefaultValue = cond([
+  [has("default"), prop("default")],
+  [T, constant(null)],
+]);
+
 export const createSchemaModel = cond([
   [
     equalType("object"),
     (scheme) => createSchemaModelOnObjectType(scheme.properties),
   ],
-  [T, constant(null)],
+  [T, getSchemaDefaultValue],
 ]);
 
 export const createSchemaModelOnObjectType = mapValues((v) =>
