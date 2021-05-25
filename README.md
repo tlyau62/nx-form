@@ -1,5 +1,8 @@
 # nx-form
 
+## Description
+Provide form creation using component and schema method. It provides valdation (veelidate) and i18n (vue i18n).
+
 ## Project setup
 ```
 npm install
