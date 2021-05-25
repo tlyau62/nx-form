@@ -69,7 +69,11 @@ const jsonSchema2 = {
     subMinuteID: { type: ["integer", "null"] },
     submissionID: { type: "integer" },
     submissionJson: { type: ["string", "null"] },
-    taskType: { type: ["string", "null"] },
+    taskType: {
+      type: "string",
+      enum: ["cat", "dog", "bird", "reptile", "other"],
+      default: "dog",
+    },
   },
 };
 

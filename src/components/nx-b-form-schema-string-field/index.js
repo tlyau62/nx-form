@@ -1,5 +1,5 @@
 import { equalTypeAndFormat, equalType } from "../../utils";
-import { T, cond, constant } from "lodash/fp";
+import { T, cond, constant, has } from "lodash/fp";
 
 export const NxBFormSchemaDatepickerField =
   require("./NxBFormSchemaDatepickerField").default;
@@ -7,7 +7,11 @@ export const NxBFormSchemaDatepickerField =
 export const NxBFormSchemaInputField =
   require("./NxBFormSchemaInputField").default;
 
+export const NxBFormSchemaSelectField =
+  require("./NxBFormSchemaSelectField").default;
+
 export const mapTypeToComponent = cond([
+  [has("enum"), constant(NxBFormSchemaSelectField)],
   [
     equalTypeAndFormat("string", "date-time"),
     constant(NxBFormSchemaDatepickerField),
