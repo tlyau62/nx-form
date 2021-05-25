@@ -13,6 +13,7 @@ import {
   head,
   includes,
   negate,
+  has,
 } from "lodash/fp";
 
 /**
@@ -66,23 +67,6 @@ export const createSchemaModelOnObjectType = mapValues((v) =>
 export const createSchemaModelWithDefault = (schema, defaultValue) =>
   compose(projectDeep(defaultValue), createSchemaModel)(schema);
 
-export const project = curry((source, target) =>
-  cond([
-    [
-      isPlainObject,
-      (target) =>
-        Object.entries(target).reduce(
-          (a, [k, v]) =>
-            Object.assign(a, {
-              [k]: v ?? propOr(null, k, source),
-            }),
-          {}
-        ),
-    ],
-    [T, constant(source)],
-  ])(target)
-);
-
 /**
  * Project value on source to target
  *
@@ -96,9 +80,7 @@ export const projectDeep = curry((source, target) =>
         Object.entries(target).reduce(
           (a, [k, v]) =>
             Object.assign(a, {
-              [k]: v
-                ? projectDeep(propOr({}, k, source), v)
-                : propOr(null, k, source),
+              [k]: projectDeep(propOr(v, k, source), v),
             }),
           {}
         ),
