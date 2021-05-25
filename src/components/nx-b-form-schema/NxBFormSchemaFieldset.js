@@ -1,11 +1,11 @@
 import { isPlainObject, clone, memoize } from "lodash/fp";
-import { createSchemaModelWithDefault, equalType } from "../utils";
-import fieldMixin from "../mixins/field.mixin";
-import NxBFormSchemaGroup from "./NxBFormSchemaGroup";
+import { createSchemaModelWithDefault, equalType } from "../../utils";
+import fieldMixin from "../../mixins/field.mixin";
+import { withSchemaGroup } from "../nx-b-form-schema-group";
 
-const NxBFormSchemaForm = (mapTypeToComponent) => {
-  const memoizeNxBFormSchemaGroup = memoize((component, NxBFormSchemeObject) =>
-    NxBFormSchemaGroup(component, NxBFormSchemeObject)
+const NxBFormSchemaFieldset = (mapTypeToComponent) => {
+  const memoizeNxBFormSchemaGroup = memoize((component, NxBFormSchemaObject) =>
+    withSchemaGroup(component, NxBFormSchemaObject)
   );
 
   const NxBFormSchemaField = (() => ({
@@ -28,7 +28,7 @@ const NxBFormSchemaForm = (mapTypeToComponent) => {
         const component = mapTypeToComponent(schema);
 
         if (equalType("object", schema)) {
-          return memoizeNxBFormSchemaGroup(component, NxBFormSchemeObject); // create field here will cause inifinite recursion, please check form-field-inf-recur branch
+          return memoizeNxBFormSchemaGroup(component, NxBFormSchemaObject); // create field here will cause inifinite recursion, please check form-field-inf-recur branch
         }
 
         return component;
@@ -36,7 +36,7 @@ const NxBFormSchemaForm = (mapTypeToComponent) => {
     },
   }))();
 
-  const NxBFormSchemeObject = (() => ({
+  const NxBFormSchemaObject = (() => ({
     mixins: [fieldMixin],
     components: {
       NxBFormSchemaField,
@@ -92,9 +92,9 @@ const NxBFormSchemaForm = (mapTypeToComponent) => {
   }))();
 
   return {
-    NxBFormSchemaForm: NxBFormSchemaField,
-    NxBFormSchemeObject,
+    NxBFormSchemaFieldset: NxBFormSchemaField,
+    NxBFormSchemaObject,
   };
 };
 
-export default NxBFormSchemaForm;
+export default NxBFormSchemaFieldset;

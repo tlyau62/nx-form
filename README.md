@@ -30,7 +30,9 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## Terms
 - Form
-  - given a schema, render its form
+  - handle form submission
+- Field set
+  - a set of fields
 - Field
   - include both group and input
   - for schema field generation
@@ -38,7 +40,8 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
   - bootstrap group element
   - provide label and validation
   - provide no form element
-- Input
+- Element
+  - e.g. Input, Datepicker, Radio
   - bootstrap form element, e.g. b-form-input
   - provide no validation
 

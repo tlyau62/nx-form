@@ -69,7 +69,7 @@
 </template>
 
 <script>
-import NxBFormGroup from "../components/NxBFormGroup";
+import { NxBFormGroup } from "../components/nx-b-form";
 import { ValidationObserver } from "vee-validate";
 
 export default {

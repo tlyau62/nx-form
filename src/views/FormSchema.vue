@@ -11,19 +11,19 @@
 
           <p>{{ nestedObject }}</p>
 
-          <NxBFormSchemaTextField
+          <NxBFormSchemaInputField
             name="address"
             :schema="textSchema"
             v-model="address"
           />
 
-          <NxBFormSchemaObjectField
+          <NxBFormSchemaObject
             name="dob"
             :schema="objectSchema"
             v-model="dob"
           />
 
-          <NxBFormSchemaObjectField
+          <NxBFormSchemaObject
             name="colour"
             :schema="nestedObjectSchema"
             v-model="nestedObject"
@@ -38,10 +38,8 @@
 
 <script>
 import { ValidationObserver } from "vee-validate";
-import {
-  NxBFormSchemaTextField,
-  NxBFormSchemaObjectField,
-} from "../components/nx-b-form-schema-fields";
+import { NxBFormSchemaObject } from "../components/nx-b-form-schema";
+import { NxBFormSchemaInputField } from "../components/nx-b-form-schema-string-field";
 
 const textSchema = {
   type: "string",
@@ -94,8 +92,8 @@ const nestedObjectSchema = {
 export default {
   components: {
     ValidationObserver,
-    NxBFormSchemaTextField,
-    NxBFormSchemaObjectField,
+    NxBFormSchemaInputField,
+    NxBFormSchemaObject,
   },
   data() {
     return {

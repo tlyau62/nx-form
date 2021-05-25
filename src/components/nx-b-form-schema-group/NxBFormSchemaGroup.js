@@ -1,6 +1,6 @@
 import { curry, startCase, lowerCase } from "lodash/fp";
-import fieldMixin from "../mixins/field.mixin";
-import { isRequired } from "../utils";
+import fieldMixin from "../../mixins/field.mixin";
+import { isRequired } from "../../utils";
 
 /**
  * Wrap a form input element to schema field

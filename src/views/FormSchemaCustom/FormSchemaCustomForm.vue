@@ -1,29 +1,29 @@
 <template>
-  <FormSchemaCustomFormTreeObject v-bind="$attrs" v-on="$listeners" />
+  <FormSchemaCustomForm v-bind="$attrs" v-on="$listeners" />
 </template>
 
 <script>
 import { cond, constant, T } from "lodash/fp";
 import { equalTypeAndFormat } from "../../utils";
 import {
-  NxBFormSchemaNxBFormGroup,
+  withSchemaFieldset,
   mapTypeToComponent as defaultMapTypeToComponent,
-} from "../../components/nx-b-form-schema-fields";
-import NxBFormSchemaForm from "../../components/NxBFormSchemaForm";
+} from "../../components/nx-b-form-schema";
+import { withNxSchemaGroup } from "../../components/nx-b-form-schema-group";
 import FormSchemaCustomFormTreeObject from "./FormSchemaCustomFormTreeObject";
 
 const mapTypeToComponent = cond([
   [
     equalTypeAndFormat("integer", "tree-object-id"),
-    constant(NxBFormSchemaNxBFormGroup(FormSchemaCustomFormTreeObject)),
+    constant(withNxSchemaGroup(FormSchemaCustomFormTreeObject)),
   ],
   [T, defaultMapTypeToComponent],
 ]);
 
 export default {
   components: {
-    FormSchemaCustomFormTreeObject:
-      NxBFormSchemaForm(mapTypeToComponent).NxBFormSchemaForm,
+    FormSchemaCustomForm:
+      withSchemaFieldset(mapTypeToComponent).NxBFormSchemaFieldset,
   },
 };
 </script>

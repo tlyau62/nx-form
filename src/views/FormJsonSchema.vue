@@ -9,13 +9,17 @@
 
           {{ form }}
 
-          <NxBFormSchemaForm name="root" :schema="jsonSchema" v-model="form" />
+          <NxBFormSchemaFieldset
+            name="root"
+            :schema="jsonSchema"
+            v-model="form"
+          />
 
           <h6>Test form 2</h6>
 
           {{ form2 }}
 
-          <NxBFormSchemaForm
+          <NxBFormSchemaFieldset
             name="root"
             :schema="jsonSchema2"
             v-model="form2"
@@ -30,7 +34,7 @@
 
 <script>
 import { ValidationObserver } from "vee-validate";
-import { NxBFormSchemaForm } from "../components/nx-b-form-schema-fields";
+import { NxBFormSchemaFieldset } from "../components/nx-b-form-schema";
 
 const jsonSchema = {
   title: "Longitude and Latitude Values",
@@ -71,7 +75,7 @@ const jsonSchema2 = {
 export default {
   components: {
     ValidationObserver,
-    NxBFormSchemaForm,
+    NxBFormSchemaFieldset,
   },
   data() {
     return {
