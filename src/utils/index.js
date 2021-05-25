@@ -16,11 +16,6 @@ import {
   has,
 } from "lodash/fp";
 
-/**
- * Get schema field type
- *
- * For both nx-form schema and json schema
- */
 export const equalType = curry((type, value) =>
   compose(
     cond([
